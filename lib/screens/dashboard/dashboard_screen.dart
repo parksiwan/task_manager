@@ -107,7 +107,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       iconName: "event_available",
                       title: 'Upcoming Schedules',
                       stats: 'Prepare tasks to come',
-                      taskMenu: 1,
+                      taskMenu: 3,
                     ),
                     const SizedBox(height: 7),
                     TaskServiceTile(

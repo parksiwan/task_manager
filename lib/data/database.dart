@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/models/missing_item.dart';
 import 'package:task_manager/models/low_stock_item.dart';
+import 'package:task_manager/models/upcoming_schedule.dart';
 import 'package:task_manager/models/notes.dart';
 
 // -------------------------------------------------------------------------------------------------------------------
@@ -75,7 +76,28 @@ class FirestoreServiceLowStock {
   }
 }
 
-class FirestoreServiceSchedule {}
+class FirestoreServiceUpcomingSchedule {
+  // get collection of upcoming schedules
+  final CollectionReference upcomingSchedules = FirebaseFirestore.instance.collection('UPCOMING_SCHEDULES');
+
+  // Create: add a new note
+  Future<void> addUpcomingSchedule(UpcomingSchedule upcomingSchedule) {
+    return upcomingSchedules.add(upcomingSchedule.toMap());
+  }
+
+  // Read: get missing items from database
+  Stream<QuerySnapshot> getUpcomingScheduleStream() {
+    // Get today's date
+    DateTime today = DateTime.now();
+    // Strip time components
+    DateTime todayWithoutTime = DateTime(today.year, today.month, today.day, 0, 0, 0);
+
+    final upcomingShcedulesStream =
+        upcomingSchedules.where('etda', isGreaterThanOrEqualTo: Timestamp.fromDate(todayWithoutTime)).orderBy('etda', descending: true).snapshots();
+
+    return upcomingShcedulesStream;
+  }
+}
 
 // -------------------------------------------------------------------------------------------------------------
 class FirestoreServiceNotes {

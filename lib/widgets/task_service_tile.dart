@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/screens/missing_item/missing_items_screen.dart';
 import 'package:task_manager/screens/low_stock_item/low_stock_items_screen.dart';
+import 'package:task_manager/screens/upcoming_schedules/upcoming_schedules_screen.dart';
 import 'package:task_manager/screens/notes/notes_screen.dart';
 
 class TaskServiceTile extends StatefulWidget {
@@ -48,6 +49,11 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
             );
             break;
           case 3:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const UpcomingSchedules()),
+            );
+            break;
           case 4:
             Navigator.push(
               context,

@@ -34,7 +34,7 @@ class _MissingItemsState extends State<MissingItems> {
         toolbarHeight: 40,
         title: const Text(
           'Missing Items', // + Provider.of<SharedStats>(context).stats.toString(),
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white, size: 30),

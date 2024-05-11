@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "651763307724",
+    "project_id": "task-manager-c8107",
+    "storage_bucket": "task-manager-c8107.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651763307724:android:be803e20371df93404de69",
+        "android_client_info": {
+          "package_name": "com.example.fb_pilot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVKtzlZQhOWwmJfQ75i12-tJCQr8_U1ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651763307724:android:0d9d88520ee9c47804de69",
+        "android_client_info": {
+          "package_name": "com.example.task_manager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVKtzlZQhOWwmJfQ75i12-tJCQr8_U1ss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

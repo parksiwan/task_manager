@@ -1,0 +1,79 @@
+import 'package:flutter/material.dart';
+import 'package:task_manager/screens/missing_item/missing_items_screen.dart';
+
+class TaskServiceTile extends StatefulWidget {
+  final String iconName;
+  final String title;
+  String stats;
+  final int taskMenu;
+
+  TaskServiceTile({
+    super.key,
+    required this.iconName,
+    required this.title,
+    required this.stats,
+    required this.taskMenu,
+    //required this.deleteFunction,
+  });
+
+  @override
+  State<TaskServiceTile> createState() => _TaskServiceTileState();
+}
+
+class _TaskServiceTileState extends State<TaskServiceTile> {
+  final string2IconData = <String, IconData>{
+    "priority_high": Icons.priority_high,
+    "gpp maybe": Icons.gpp_maybe_outlined,
+    "event_available": Icons.event_available,
+    "speaker_notes": Icons.speaker_notes,
+  };
+
+  //void passMissingItemsCount(int itemCount) {
+  //  setState(() {
+  //    widget.stats = itemCount.toString() + " items";
+  //  });
+  //}
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        switch (widget.taskMenu) {
+          case 1:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MissingItems()),
+            );
+            break;
+          case 2:
+          case 3:
+          case 4:
+        }
+      },
+      child: Card(
+        color: Theme.of(context).colorScheme.secondary, // Card background color
+        elevation: 5, // Elevation (shadow) of the card
+        shadowColor: Colors.black, // Shadow color
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Theme.of(context).colorScheme.onBackground, // Circle background color
+            radius: 17, // Circle radius
+            child: Icon(
+              string2IconData[widget.iconName], // Icon to display inside the circle
+              color: Colors.black, // Icon color
+              size: 20, // Icon size
+            ),
+          ),
+          title: Text(widget.title, style: TextStyle(color: Colors.white), textAlign: TextAlign.left),
+          subtitle: Text(widget.stats,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.left),
+          //contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+          trailing: Icon(
+            Icons.navigate_next,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+        ),
+      ),
+    );
+  }
+}

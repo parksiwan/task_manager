@@ -1,78 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:task_manager/data/database.dart';
-import 'package:task_manager/models/missing_item.dart';
+import 'package:task_manager/models/low_stock_item.dart';
+import 'package:provider/provider.dart';
 
-class EditMissingItem extends StatefulWidget {
-  final FirestoreServiceMI fb;
-  final String docID;
-  final MissingItem item;
-  //final Function() loadNewMissingItem;
-  const EditMissingItem({
+class AddLowStockItem extends StatefulWidget {
+  final FirestoreServiceLowStock fb;
+  const AddLowStockItem({
     Key? key,
     required this.fb,
-    required this.docID,
-    required this.item,
-    //required this.loadNewMissingItem,
   }) : super(key: key);
 
   @override
-  State<EditMissingItem> createState() => _EditMissingItemState();
+  State<AddLowStockItem> createState() => _AddLowStockItemState();
 }
 
-class _EditMissingItemState extends State<EditMissingItem> {
+class _AddLowStockItemState extends State<AddLowStockItem> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _productNameController = TextEditingController();
   final TextEditingController _codeController = TextEditingController();
-  final TextEditingController _qtyController = TextEditingController();
+  final TextEditingController _currentQtyController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _shopController = TextEditingController();
-  final TextEditingController _deliveryDateController = TextEditingController();
+  final TextEditingController _reportDateController = TextEditingController();
   final TextEditingController _pickerController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    //String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now().add(const Duration(days: 1)));
-    //_deliveryDateController.text = formattedDate;
-    _productNameController.text = widget.item.productName;
-    _codeController.text = widget.item.productCode;
-    _qtyController.text = widget.item.qty;
-    _locationController.text = widget.item.location;
-    _shopController.text = widget.item.shopName;
-    _deliveryDateController.text = DateFormat('dd/MM/yyyy').format(widget.item.deliveryDate);
-    _pickerController.text = widget.item.picker;
+    String formattedDate = DateFormat('dd/MM/yyyy').format(DateTime.now());
+    _reportDateController.text = formattedDate;
   }
 
   // save new task
-  void editMissingItem() {
+  void addLowStockItem() {
     setState(() {
-      MissingItem missingItem = MissingItem(
-          _productNameController.text,
-          _codeController.text,
-          _qtyController.text,
-          _locationController.text,
-          _shopController.text,
-          DateFormat('dd/MM/yyyy').parse(_deliveryDateController.text),
-          _pickerController.text,
-          widget.item.pickupCompleted,
-          widget.item.checker,
-          widget.item.memo);
-      widget.fb.updateMissingItem(widget.docID, missingItem);
+      LowStockItem lowStockItem = LowStockItem(_productNameController.text, _codeController.text, _currentQtyController.text, _locationController.text,
+          DateFormat('dd/MM/yyyy').parse(_reportDateController.text), _pickerController.text, false, "", "");
+      widget.fb.addLowStockItem(lowStockItem);
 
       _productNameController.clear();
       _codeController.clear();
-      _qtyController.clear();
+      _currentQtyController.clear();
       _locationController.clear();
-      _shopController.clear();
-      _deliveryDateController.clear();
+      _reportDateController.clear();
       _pickerController.clear();
     });
     Navigator.of(context).pop();
+    //widget.loadNewMissingItem();
   }
 
   @override
   Widget build(BuildContext context) {
+    _pickerController.text = Provider.of<UserInfoProvider>(context).userName;
     return Container(
       child: Form(
         // -->into function
@@ -82,7 +61,7 @@ class _EditMissingItemState extends State<EditMissingItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Edit missing item information:',
+              'Enter low stock item information:',
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.normal),
             ),
             const SizedBox(height: 10),
@@ -116,9 +95,9 @@ class _EditMissingItemState extends State<EditMissingItem> {
                 const SizedBox(width: 5),
                 Expanded(
                   child: TextFormField(
-                    controller: _qtyController,
+                    controller: _currentQtyController,
                     style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(labelText: 'Qty', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+                    decoration: InputDecoration(labelText: 'Current Qty', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return "Please enter Quantity";
@@ -144,28 +123,16 @@ class _EditMissingItemState extends State<EditMissingItem> {
               ],
             ),
             const SizedBox(height: 5),
-            TextFormField(
-              controller: _shopController,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(labelText: 'Shop Name', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return "Please enter Shop name";
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 5),
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
-                    controller: _deliveryDateController,
+                    controller: _reportDateController,
                     style: const TextStyle(color: Colors.white),
-                    decoration: InputDecoration(labelText: 'Delivery Date', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
+                    decoration: InputDecoration(labelText: 'Report Date', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return "Please enter Delivery date";
+                        return "Please enter Report date";
                       }
                       return null;
                     },
@@ -178,7 +145,7 @@ class _EditMissingItemState extends State<EditMissingItem> {
                       );
                       if (pickedDate != null) {
                         String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
-                        _deliveryDateController.text = formattedDate.toString();
+                        _reportDateController.text = formattedDate.toString();
                       }
                     },
                   ),
@@ -208,7 +175,7 @@ class _EditMissingItemState extends State<EditMissingItem> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {
-                        editMissingItem();
+                        addLowStockItem();
                       });
                       //Navigator.pop(context); // Close the bottom sheet when button is pressed
                     }

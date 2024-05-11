@@ -2,16 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:task_manager/firebase_options.dart';
-//import 'package:hive_flutter/hive_flutter.dart';
+import 'package:task_manager/data/database.dart';
+import 'package:task_manager/screens/auth/auth.dart';
 import 'package:task_manager/screens/dashboard/dashboard_screen.dart';
 import 'dart:async';
+import 'package:provider/provider.dart';
 
 void main() async {
-  // init the hive
-  //await Hive.initFlutter();
-
-  // open a box
-  //var box = await Hive.openBox('mybox');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
@@ -24,27 +21,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Task Manager",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Color.fromRGBO(1, 45, 115, 1),
-              primary: Color.fromRGBO(120, 180, 156, 1), // from hollden
-
-              onPrimary: Color.fromRGBO(176, 244, 252, 1), // from hollden
-              secondary: Color.fromRGBO(42, 41, 77, 1), // from holden (background color of tile or card)
-              background: Color.fromRGBO(40, 36, 68, 1), // from hollden (main background color)
-              onBackground: Color.fromRGBO(144, 140, 188, 1), // from hollden
-              surface: Color.fromRGBO(40, 36, 68, 1),
-              onSurface: Colors.white),
-          useMaterial3: true),
-      home: SplashScreen(),
+    return ChangeNotifierProvider<UserInfoProvider>(
+      create: (context) => UserInfoProvider(),
+      child: MaterialApp(
+          title: "Task Manager",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: const Color.fromRGBO(1, 45, 115, 1),
+                  primary: const Color.fromRGBO(120, 180, 156, 1), // from hollden
+                  onPrimary: const Color.fromRGBO(176, 244, 252, 1), // from hollden
+                  secondary: const Color.fromRGBO(42, 41, 77, 1), // from holden (background color of tile or card)
+                  background: const Color.fromRGBO(40, 36, 68, 1), // from hollden (main background color)
+                  onBackground: const Color.fromRGBO(144, 140, 188, 1), // from hollden
+                  surface: const Color.fromRGBO(40, 36, 68, 1),
+                  onSurface: Colors.white),
+              useMaterial3: true),
+          home: const AuthPage() // SplashScreen(),
+          ),
     );
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -68,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
             Color(0xFFCE1010),
           ]),
         ),
-        child: Column(
+        child: const Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -79,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 //  height: 300.0,
                 //  width: 300.0,
                 //),
-                const Text(
+                Text(
                   "Task Manager",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -89,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
                 SizedBox(height: 5),
-                const Text(
+                Text(
                   "powered by Siwan",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -100,7 +101,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ],
             ),
-            const CircularProgressIndicator(
+            CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
             ),
           ],

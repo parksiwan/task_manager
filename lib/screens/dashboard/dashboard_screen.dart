@@ -1,10 +1,31 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/widgets/task_service_tile.dart';
 import 'package:task_manager/widgets/notes_display.dart';
-import 'package:task_manager/screens/missing_item/missing_items_screen.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  //int stats = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void logout() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // Log out successful
+    } catch (e) {
+      print("Error signing out: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,12 +33,6 @@ class DashboardScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         toolbarHeight: 40,
-        leading: Container(
-          child: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_outlined),
-          ),
-        ),
         title: const Text(
           'Task Manager',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 25),
@@ -29,11 +44,11 @@ class DashboardScreen extends StatelessWidget {
         elevation: 0,
         scrolledUnderElevation: 0,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 5),
-            child: Container(
-                decoration: BoxDecoration(border: Border.all(color: Colors.white70, width: 2), shape: BoxShape.circle),
-                child: const CircleAvatar(radius: 15, child: Text("SI"))),
+          Container(
+            child: IconButton(
+              onPressed: logout,
+              icon: const Icon(Icons.logout),
+            ),
           ),
         ],
       ),
@@ -44,15 +59,15 @@ class DashboardScreen extends StatelessWidget {
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
-          child: Column(
+          child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 'Please post & share every information and make them valuable for our jobs.',
                 style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, height: 1.5),
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
             ],
           ),
         ),
@@ -66,7 +81,7 @@ class DashboardScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
                 child: Column(
@@ -77,29 +92,29 @@ class DashboardScreen extends StatelessWidget {
                     TaskServiceTile(
                       iconName: "priority_high",
                       title: 'Missing Items',
-                      stats: '5 items',
+                      stats: 'Fix the missing pickup', //Provider.of<SharedStats>(context).stats.toString(),
                       taskMenu: 1,
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     TaskServiceTile(
                       iconName: "gpp maybe",
                       title: 'Low Stock Alarm',
-                      stats: '5 items',
-                      taskMenu: 1,
+                      stats: 'Report low stock items',
+                      taskMenu: 2,
                     ), // week view calaendar
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     TaskServiceTile(
                       iconName: "event_available",
                       title: 'Upcoming Schedules',
-                      stats: '5 items',
+                      stats: 'Prepare tasks to come',
                       taskMenu: 1,
                     ),
-                    SizedBox(height: 7),
+                    const SizedBox(height: 7),
                     TaskServiceTile(
                       iconName: "speaker_notes",
                       title: 'Notes',
-                      stats: '5 items',
-                      taskMenu: 1,
+                      stats: 'Be noted',
+                      taskMenu: 4,
                     ),
                   ],
                 ),

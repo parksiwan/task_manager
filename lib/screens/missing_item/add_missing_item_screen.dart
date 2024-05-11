@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:task_manager/data/database.dart';
 import 'package:task_manager/models/missing_item.dart';
+import 'package:provider/provider.dart';
 
 class AddMissingItem extends StatefulWidget {
   final FirestoreServiceMI fb;
-  //final Function() loadNewMissingItem;
   const AddMissingItem({
     Key? key,
     required this.fb,
-    //required this.loadNewMissingItem,
   }) : super(key: key);
 
   @override
@@ -37,7 +36,7 @@ class _AddMissingItemState extends State<AddMissingItem> {
   void addMissingItem() {
     setState(() {
       MissingItem missingItem = MissingItem(_productNameController.text, _codeController.text, _qtyController.text, _locationController.text,
-          _shopController.text, DateFormat('dd/MM/yyyy').parse(_deliveryDateController.text), _pickerController.text, false);
+          _shopController.text, DateFormat('dd/MM/yyyy').parse(_deliveryDateController.text), _pickerController.text, false, "", "");
       widget.fb.addMissingItem(missingItem);
 
       _productNameController.clear();
@@ -54,6 +53,7 @@ class _AddMissingItemState extends State<AddMissingItem> {
 
   @override
   Widget build(BuildContext context) {
+    _pickerController.text = Provider.of<UserInfoProvider>(context).userName;
     return Container(
       child: Form(
         // -->into function
@@ -62,14 +62,14 @@ class _AddMissingItemState extends State<AddMissingItem> {
           //mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Enter missing item information:',
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.normal),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextFormField(
               controller: _productNameController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(labelText: 'Product Name', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -78,13 +78,13 @@ class _AddMissingItemState extends State<AddMissingItem> {
                 return null;
               },
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
                     controller: _codeController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(labelText: 'Code', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -94,11 +94,11 @@ class _AddMissingItemState extends State<AddMissingItem> {
                     },
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Expanded(
                   child: TextFormField(
                     controller: _qtyController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(labelText: 'Qty', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -108,11 +108,11 @@ class _AddMissingItemState extends State<AddMissingItem> {
                     },
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Expanded(
                   child: TextFormField(
                     controller: _locationController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(labelText: 'Location', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -124,10 +124,10 @@ class _AddMissingItemState extends State<AddMissingItem> {
                 ),
               ],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             TextFormField(
               controller: _shopController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(labelText: 'Shop Name', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -136,13 +136,13 @@ class _AddMissingItemState extends State<AddMissingItem> {
                 return null;
               },
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
                     controller: _deliveryDateController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(labelText: 'Delivery Date', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -158,17 +158,17 @@ class _AddMissingItemState extends State<AddMissingItem> {
                         lastDate: DateTime(2050),
                       );
                       if (pickedDate != null) {
-                        String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate!);
+                        String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
                         _deliveryDateController.text = formattedDate.toString();
                       }
                     },
                   ),
                 ),
-                SizedBox(width: 5),
+                const SizedBox(width: 5),
                 Expanded(
                   child: TextFormField(
                     controller: _pickerController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     decoration: InputDecoration(labelText: 'Picker', border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -180,7 +180,7 @@ class _AddMissingItemState extends State<AddMissingItem> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -194,7 +194,7 @@ class _AddMissingItemState extends State<AddMissingItem> {
                       //Navigator.pop(context); // Close the bottom sheet when button is pressed
                     }
                   },
-                  child: Text('Submit', style: TextStyle(color: Colors.black)),
+                  child: const Text('Submit', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),

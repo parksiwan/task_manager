@@ -7,8 +7,11 @@ class MissingItem {
   DateTime deliveryDate;
   String picker;
   bool pickupCompleted = false;
+  String checker;
+  String memo;
 
-  MissingItem(this.productName, this.productCode, this.qty, this.location, this.shopName, this.deliveryDate, this.picker, this.pickupCompleted);
+  MissingItem(this.productName, this.productCode, this.qty, this.location, this.shopName, this.deliveryDate, this.picker, this.pickupCompleted, this.checker,
+      this.memo);
 
   // Convert a missing item object into a map
   Map<String, dynamic> toMap() {
@@ -20,12 +23,14 @@ class MissingItem {
       'shopName': shopName,
       'deliveryDate': deliveryDate,
       'picker': picker,
-      'pickupCompleted': pickupCompleted
+      'pickupCompleted': pickupCompleted,
+      'checker': checker,
+      'memo': memo
     };
   }
 
   // update a missing item and into a map
-  Map<String, dynamic> updateMissingItemToMap(productName, productCode, qty, location, shopName, deliveryDate, picker, pickupCompleted) {
+  Map<String, dynamic> updateMissingItemToMap(productName, productCode, qty, location, shopName, deliveryDate, picker, pickupCompleted, checker, memo) {
     return {
       'productName': productName,
       'productCode': productCode,
@@ -34,7 +39,9 @@ class MissingItem {
       'shopName': shopName,
       'deliveryDate': deliveryDate,
       'picker': picker,
-      'pickupCompleted': pickupCompleted
+      'pickupCompleted': pickupCompleted,
+      'checker': checker,
+      'memo': memo
     };
   }
 }

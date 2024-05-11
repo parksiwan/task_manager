@@ -2,36 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:task_manager/data/database.dart';
-import 'package:task_manager/models/missing_item.dart';
-import 'package:task_manager/screens/missing_item/edit_missing_item_screen.dart';
-import 'package:task_manager/screens/missing_item/add_memo_missing_item_screen.dart';
-import 'package:task_manager/screens/missing_item/show_memo_missing_item_screen.dart';
+import 'package:task_manager/models/low_stock_item.dart';
+
+import 'package:task_manager/screens/low_stock_item/edit_low_stock_item_screen.dart';
+import 'package:task_manager/screens/low_stock_item/add_memo_low_stock_item_screen.dart';
+import 'package:task_manager/screens/low_stock_item/show_memo_low_stock_item_screen.dart';
 import 'package:provider/provider.dart';
 
-class MissingItemsTile extends StatefulWidget {
+class LowStockItemsTile extends StatefulWidget {
   final String productName;
   final String productCode;
-  final String qty;
+  final String currentQty;
   final String location;
-  final String shopName;
-  final DateTime deliveryDate;
+  final DateTime reportDate;
   final String picker;
-  final bool pickupCompleted;
+  final bool reportAccepted;
   String checker;
   final String memo;
-  final FirestoreServiceMI fb;
+  final FirestoreServiceLowStock fb;
   final String docID;
 
-  MissingItemsTile({
+  LowStockItemsTile({
     super.key,
     required this.productName,
     required this.productCode,
-    required this.qty,
+    required this.currentQty,
     required this.location,
-    required this.shopName,
-    required this.deliveryDate,
+    required this.reportDate,
     required this.picker,
-    required this.pickupCompleted,
+    required this.reportAccepted,
     required this.checker,
     required this.memo,
     required this.fb,
@@ -39,10 +38,10 @@ class MissingItemsTile extends StatefulWidget {
   });
 
   @override
-  State<MissingItemsTile> createState() => _MissingItemsTileState();
+  State<LowStockItemsTile> createState() => _LowStockItemsTileState();
 }
 
-class _MissingItemsTileState extends State<MissingItemsTile> {
+class _LowStockItemsTileState extends State<LowStockItemsTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -55,17 +54,17 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
           children: [
             SlidableAction(
               onPressed: (context) {
-                MissingItem item = MissingItem(widget.productName, widget.productCode, widget.qty, widget.location, widget.shopName, widget.deliveryDate,
-                    widget.picker, widget.pickupCompleted, widget.checker, widget.memo);
+                LowStockItem item = LowStockItem(widget.productName, widget.productCode, widget.currentQty, widget.location, widget.reportDate, widget.picker,
+                    widget.reportAccepted, widget.checker, widget.memo);
                 setState(() {
-                  item.pickupCompleted = !item.pickupCompleted;
-                  if (item.pickupCompleted) {
+                  item.reportAccepted = !item.reportAccepted;
+                  if (item.reportAccepted) {
                     item.checker = Provider.of<UserInfoProvider>(context, listen: false).userName;
                     widget.checker = item.checker;
                   } else {
                     item.checker = "";
                   }
-                  widget.fb.updateMissingItem(widget.docID, item);
+                  widget.fb.updateLowStockItem(widget.docID, item);
                 });
               },
               icon: Icons.check_outlined,
@@ -74,15 +73,13 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
             ),
             SlidableAction(
               onPressed: (context) {
-                MissingItem item = MissingItem(widget.productName, widget.productCode, widget.qty, widget.location, widget.shopName, widget.deliveryDate,
-                    widget.picker, widget.pickupCompleted, widget.checker, widget.memo);
-                print("----");
-                print(widget.checker);
+                LowStockItem item = LowStockItem(widget.productName, widget.productCode, widget.currentQty, widget.location, widget.reportDate, widget.picker,
+                    widget.reportAccepted, widget.checker, widget.memo);
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -93,13 +90,13 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
             ),
             SlidableAction(
               onPressed: (context) {
-                MissingItem item = MissingItem(widget.productName, widget.productCode, widget.qty, widget.location, widget.shopName, widget.deliveryDate,
-                    widget.picker, widget.pickupCompleted, widget.checker, widget.memo);
+                LowStockItem item = LowStockItem(widget.productName, widget.productCode, widget.currentQty, widget.location, widget.reportDate, widget.picker,
+                    widget.reportAccepted, widget.checker, widget.memo);
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: EditMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(padding: const EdgeInsets.all(16), child: EditLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -110,7 +107,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
             ),
             SlidableAction(
               onPressed: (context) {
-                widget.fb.deleteMissingItem(widget.docID);
+                widget.fb.deleteLowStockItem(widget.docID);
               }, // widget.deleteFunction,
               icon: Icons.delete,
               backgroundColor: Colors.purple.shade400,
@@ -145,7 +142,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                       width: 130,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(topRight: Radius.circular(20)),
-                        color: Theme.of(context).colorScheme.primary,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -154,11 +151,11 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const Text(
-                              "Delivery Date",
+                              "Report Date",
                               style: TextStyle(color: Colors.white, fontSize: 10),
                             ),
                             Text(
-                              DateFormat('dd/MM/yyyy').format(widget.deliveryDate),
+                              DateFormat('dd/MM/yyyy').format(widget.reportDate),
                               style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.black),
                             ),
                           ],
@@ -180,7 +177,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                           ),
                           Text(
                             widget.productCode,
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
+                            style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
                           ),
                         ],
                       ),
@@ -192,13 +189,13 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                         child: Row(
                           children: [
                             const Text(
-                              "Shop : ",
+                              "Location : ",
                               style: TextStyle(color: Colors.white, fontSize: 12),
                             ),
                             Expanded(
                               child: Text(
-                                widget.shopName,
-                                style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
+                                widget.location,
+                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -216,12 +213,12 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                       child: Row(
                         children: [
                           const Text(
-                            "QTY : ",
+                            "Current QTY : ",
                             style: TextStyle(color: Colors.white, fontSize: 12),
                           ),
                           Text(
-                            widget.qty,
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
+                            widget.currentQty,
+                            style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
                           ),
                         ],
                       ),
@@ -239,7 +236,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                             Expanded(
                               child: Text(
                                 widget.picker,
-                                style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
+                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -250,45 +247,28 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 7.0, top: 7.0),
+                      padding: const EdgeInsets.only(top: 7.0, right: 5.0),
                       child: Row(
                         children: [
-                          const Text(
-                            "Location : ",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
-                          ),
-                          Text(
-                            widget.location,
-                            style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 5.0),
-                      child: Row(
-                        children: [
-                          widget.pickupCompleted
+                          widget.reportAccepted
                               ? const Icon(Icons.check_circle, color: Colors.greenAccent, size: 20)
                               : const Icon(Icons.error, color: Colors.orangeAccent, size: 20),
-                          widget.pickupCompleted
-                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 12))
+                          widget.reportAccepted
+                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12))
                               : const Text(""),
                           const SizedBox(width: 10),
                           widget.memo == ""
                               ? const SizedBox(width: 0, height: 0)
                               : GestureDetector(
                                   onTap: () {
-                                    //MissingItem item = MissingItem(widget.productName, widget.productCode, widget.qty, widget.location, widget.shopName,
-                                    //    widget.deliveryDate, widget.picker, widget.pickupCompleted, widget.checker, widget.memo);
                                     showModalBottomSheet(
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SingleChildScrollView(
-                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoMissingItem(memo: widget.memo)),
+                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoLowStockItem(memo: widget.memo)),
                                         );
                                       },
                                     );

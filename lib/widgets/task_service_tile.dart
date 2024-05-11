@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/screens/missing_item/missing_items_screen.dart';
+import 'package:task_manager/screens/low_stock_item/low_stock_items_screen.dart';
+import 'package:task_manager/screens/notes/notes_screen.dart';
 
 class TaskServiceTile extends StatefulWidget {
   final String iconName;
@@ -28,12 +30,6 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
     "speaker_notes": Icons.speaker_notes,
   };
 
-  //void passMissingItemsCount(int itemCount) {
-  //  setState(() {
-  //    widget.stats = itemCount.toString() + " items";
-  //  });
-  //}
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -42,12 +38,21 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
           case 1:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => MissingItems()),
+              MaterialPageRoute(builder: (context) => const MissingItems()),
             );
             break;
           case 2:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const LowStockItems()),
+            );
+            break;
           case 3:
           case 4:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Notes()),
+            );
         }
       },
       child: Card(
@@ -64,7 +69,7 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
               size: 20, // Icon size
             ),
           ),
-          title: Text(widget.title, style: TextStyle(color: Colors.white), textAlign: TextAlign.left),
+          title: Text(widget.title, style: const TextStyle(color: Colors.white), textAlign: TextAlign.left),
           subtitle: Text(widget.stats,
               style: Theme.of(context).textTheme.titleSmall!.copyWith(color: Theme.of(context).colorScheme.primary), textAlign: TextAlign.left),
           //contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),

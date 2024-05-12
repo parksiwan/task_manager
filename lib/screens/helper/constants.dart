@@ -15,3 +15,12 @@ List priority = [
   {"name": "High", "value": "High"},
   {"name": "Normal", "value": "Normal"},
 ];
+
+List category = [
+  {"name": "Dispatch", "value": "Dispatch"},
+  {"name": "Receiving", "value": "Receiving"},
+  {"name": "Pick-up", "value": "Pick-up"},
+  {"name": "Return", "value": "Return"},
+  {"name": "Container", "value": "Container"},
+  {"name": "others", "value": "others"},
+];

@@ -23,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPwController = TextEditingController();
-  String? dropdownTeamNameValue = "SCM-General";
+  String? dropdownTeamNameValue = "WH-General";
 
   void register() async {
     // show loading circle

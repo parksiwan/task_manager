@@ -88,7 +88,7 @@ class _NotesTileState extends State<NotesTile> {
                           children: [
                             Text(
                               widget.category,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontSize: 16),
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white, fontSize: 16),
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(width: 3),

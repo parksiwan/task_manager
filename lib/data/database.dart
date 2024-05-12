@@ -80,22 +80,33 @@ class FirestoreServiceUpcomingSchedule {
   // get collection of upcoming schedules
   final CollectionReference upcomingSchedules = FirebaseFirestore.instance.collection('UPCOMING_SCHEDULES');
 
-  // Create: add a new note
+  // Create: add a new schedule
   Future<void> addUpcomingSchedule(UpcomingSchedule upcomingSchedule) {
     return upcomingSchedules.add(upcomingSchedule.toMap());
   }
 
-  // Read: get missing items from database
-  Stream<QuerySnapshot> getUpcomingScheduleStream() {
+  // Read: get upcoming schedules from database
+  Stream<QuerySnapshot> getUpcomingScheduleStream(DateTime selectedDate) {
     // Get today's date
-    DateTime today = DateTime.now();
+    //DateTime startingDate = selectedDate;
     // Strip time components
-    DateTime todayWithoutTime = DateTime(today.year, today.month, today.day, 0, 0, 0);
+    DateTime startingDate = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 0, 0, 0);
 
     final upcomingShcedulesStream =
-        upcomingSchedules.where('etda', isGreaterThanOrEqualTo: Timestamp.fromDate(todayWithoutTime)).orderBy('etda', descending: true).snapshots();
+        upcomingSchedules.where('etda', isGreaterThanOrEqualTo: Timestamp.fromDate(startingDate)).orderBy('etda', descending: false).snapshots();
 
     return upcomingShcedulesStream;
+  }
+
+  // Update: update upcoming schedule given a doc id
+  Future<void> updateUpcomingSchedule(String docID, UpcomingSchedule item) {
+    return upcomingSchedules.doc(docID).update(
+        item.updateUpcomingScheduleToMap(item.category, item.title, item.contents, item.etda, item.poster, item.taskCompleted, item.checker, item.memo));
+  }
+
+  //Delete: delete upcoming schedule given a doc id
+  Future<void> deleteUpcomingSchedule(String docID) {
+    return upcomingSchedules.doc(docID).delete();
   }
 }
 

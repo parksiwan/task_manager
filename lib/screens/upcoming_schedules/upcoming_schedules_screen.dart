@@ -87,8 +87,8 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
             child: Column(
               children: [
                 TableCalendar(
-                  firstDay: DateTime.utc(2024, 1, 1),
-                  lastDay: DateTime.utc(2028, 12, 31),
+                  firstDay: DateTime.now().subtract(const Duration(days: 360)),
+                  lastDay: DateTime.now().add(const Duration(days: 360)),
                   focusedDay: _focusedDay,
                   calendarFormat: _calendarFormat,
                   selectedDayPredicate: (day) {
@@ -109,8 +109,9 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                     _focusedDay = focusedDay;
                   },
                   calendarStyle: CalendarStyle(
+                    weekendTextStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                     selectedDecoration: BoxDecoration(
-                      color: Colors.blue,
+                      color: Theme.of(context).colorScheme.primary,
                       shape: BoxShape.circle,
                     ),
                     selectedTextStyle: TextStyle(color: Colors.white),
@@ -135,9 +136,6 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                               Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                               data['checker'] = data['checker'] ?? "";
                               data['memo'] = data['memo'] ?? "";
-                              print('==============');
-                              print(_selectedDay);
-                              print(Timestamp.fromDate(data['etda'].toDate()));
                               return UpcomingSchedulesTile(
                                 category: data['category'],
                                 title: data['title'],

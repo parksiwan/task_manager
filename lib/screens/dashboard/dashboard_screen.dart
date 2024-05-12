@@ -125,7 +125,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const Column(
                 children: [
-                  NotesDisplay(title: 'test1', contents: 'test1 display'),
+                  NotesDisplay(title: 'Pickup', contents: 'Please take all picture of pick-ups before taping up'),
                   NotesDisplay(title: 'test2', contents: 'test2 display'),
                 ],
               )

@@ -4,10 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:task_manager/data/database.dart';
 import 'package:task_manager/models/upcoming_schedule.dart';
 
-//import 'package:task_manager/screens/upcoming_schedule/edit_low_stock_item_screen.dart';
-//import 'package:task_manager/screens/low_stock_item/add_memo_low_stock_item_screen.dart';
+import 'package:task_manager/screens/upcoming_schedules/edit_upcoming_schedule_screen.dart';
+import 'package:task_manager/screens/upcoming_schedules/add_memo_upcoming_schedule_screen.dart';
 //import 'package:task_manager/screens/low_stock_item/show_memo_low_stock_item_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:task_manager/screens/upcoming_schedules/show_memo_upcoming_schedule_screen.dart';
 
 class UpcomingSchedulesTile extends StatefulWidget {
   final String category;
@@ -62,14 +63,13 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                   } else {
                     item.checker = "";
                   }
-                  // widget.fb.updateLowStockItem(widget.docID, item);
+                  widget.fb.updateUpcomingSchedule(widget.docID, item);
                 });
               },
               icon: Icons.check_outlined,
               backgroundColor: Colors.purple.shade100,
               borderRadius: BorderRadius.circular(20),
             ),
-            /*
             SlidableAction(
               onPressed: (context) {
                 UpcomingSchedule item = UpcomingSchedule(
@@ -77,9 +77,9 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    //return SingleChildScrollView(
-                    //  child: Container(padding: const EdgeInsets.all(16), child: AddMemoLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
-                    //);
+                    return SingleChildScrollView(
+                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
+                    );
                   },
                 );
               },
@@ -94,9 +94,9 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
-                    //return SingleChildScrollView(
-                    //  child: Container(padding: const EdgeInsets.all(16), child: EditUpcomingSchedule(fb: widget.fb, docID: widget.docID, note: note)),
-                    //);
+                    return SingleChildScrollView(
+                      child: Container(padding: const EdgeInsets.all(16), child: EditUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
+                    );
                   },
                 );
               },
@@ -104,7 +104,6 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
               backgroundColor: Colors.purple.shade300,
               borderRadius: BorderRadius.circular(20),
             ),
-            */
             SlidableAction(
               onPressed: (context) {
                 widget.fb.deleteUpcomingSchedule(widget.docID);
@@ -219,14 +218,14 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                               ? const SizedBox(width: 0, height: 0)
                               : GestureDetector(
                                   onTap: () {
-                                    //showModalBottomSheet(
-                                    //  context: context,
-                                    //  builder: (BuildContext context) {
-                                    //    return SingleChildScrollView(
-                                    //      child: Container(padding: const EdgeInsets.all(16), child: ShowMemoLowStockItem(memo: widget.memo)),
-                                    //    );
-                                    //  },
-                                    //);
+                                    showModalBottomSheet(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return SingleChildScrollView(
+                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoUpcomingSchedule(memo: widget.memo)),
+                                        );
+                                      },
+                                    );
                                   },
                                   child: const Icon(
                                     Icons.comment,

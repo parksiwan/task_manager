@@ -78,7 +78,7 @@ class _EditLowStockItemState extends State<EditLowStockItem> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              'Enter low stock item information:',
+              'Edit low stock item information:',
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.normal),
             ),
             const SizedBox(height: 10),
@@ -197,7 +197,7 @@ class _EditLowStockItemState extends State<EditLowStockItem> {
                       //Navigator.pop(context); // Close the bottom sheet when button is pressed
                     }
                   },
-                  child: const Text('Submit', style: TextStyle(color: Colors.black)),
+                  child: const Text('Edit', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),

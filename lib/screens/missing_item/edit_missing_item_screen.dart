@@ -213,7 +213,7 @@ class _EditMissingItemState extends State<EditMissingItem> {
                       //Navigator.pop(context); // Close the bottom sheet when button is pressed
                     }
                   },
-                  child: const Text('Submit', style: TextStyle(color: Colors.black)),
+                  child: const Text('Edit', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),

@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:task_manager/data/database.dart';
+import 'package:task_manager/models/upcoming_schedule.dart';
+import 'package:task_manager/screens/upcoming_schedules/show_upcoming_schedule_screen.dart';
 import 'package:task_manager/widgets/upcoming_schedules_tile.dart';
 import 'package:task_manager/screens/upcoming_schedules/add_upcoming_schedule_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -136,17 +138,35 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                               Map<String, dynamic> data = document.data() as Map<String, dynamic>;
                               data['checker'] = data['checker'] ?? "";
                               data['memo'] = data['memo'] ?? "";
-                              return UpcomingSchedulesTile(
-                                category: data['category'],
-                                title: data['title'],
-                                contents: data['contents'],
-                                etda: data['etda'].toDate(),
-                                poster: data['poster'],
-                                taskCompleted: data['taskCompleted'],
-                                checker: data['checker'],
-                                memo: data['memo'],
-                                fb: _fb,
-                                docID: docID,
+                              return GestureDetector(
+                                onTap: () {
+                                  UpcomingSchedule upcomingSchedule = UpcomingSchedule(data['category'], data['title'], data['contents'], data['etda'].toDate(),
+                                      data['poster'], data['taskCompleted'], data['checker'], data['memo']);
+                                  showModalBottomSheet(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return SingleChildScrollView(
+                                        child: Container(
+                                            padding: const EdgeInsets.all(16),
+                                            child: ShowUpcomingSchedule(
+                                              upcomingSchedule: upcomingSchedule,
+                                            )),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: UpcomingSchedulesTile(
+                                  category: data['category'],
+                                  title: data['title'],
+                                  contents: data['contents'],
+                                  etda: data['etda'].toDate(),
+                                  poster: data['poster'],
+                                  taskCompleted: data['taskCompleted'],
+                                  checker: data['checker'],
+                                  memo: data['memo'],
+                                  fb: _fb,
+                                  docID: docID,
+                                ),
                               );
                             },
                           );

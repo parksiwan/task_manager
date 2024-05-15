@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/models/notes.dart';
+import 'package:task_manager/models/upcoming_schedule.dart';
 import 'package:intl/intl.dart';
 
-class ShowNote extends StatelessWidget {
-  final Note note;
+class ShowUpcomingSchedule extends StatelessWidget {
+  final UpcomingSchedule upcomingSchedule;
 
-  const ShowNote({
+  const ShowUpcomingSchedule({
     super.key,
-    required this.note,
+    required this.upcomingSchedule,
   });
 
   @override
@@ -30,15 +30,10 @@ class ShowNote extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          note.category,
+                          upcomingSchedule.category,
                           style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                         ),
-                        const SizedBox(width: 3),
-                        note.priority == 'Normal' ? const Text("") : const SizedBox(width: 0, height: 0),
-                        note.priority == "High" ? const Icon(Icons.star, color: Colors.amberAccent, size: 14) : const SizedBox(width: 0, height: 0),
-                        note.priority == "Very High" ? const Icon(Icons.star, color: Colors.amberAccent, size: 14) : const SizedBox(width: 0, height: 0),
-                        note.priority == "Very High" ? const Icon(Icons.star, color: Colors.amberAccent, size: 14) : const SizedBox(width: 0, height: 0),
                       ],
                     ),
                   ),
@@ -47,7 +42,7 @@ class ShowNote extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
-                      DateFormat('dd/MM/yyyy').format(note.postDate),
+                      DateFormat('dd/MM/yyyy').format(upcomingSchedule.etda),
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground),
                     ),
                   ),
@@ -60,7 +55,7 @@ class ShowNote extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 7.0, top: 7),
                 child: Text(
-                  note.title,
+                  upcomingSchedule.title,
                   style: const TextStyle(color: Color.fromRGBO(136, 189, 241, 1), fontSize: 17, fontWeight: FontWeight.bold),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -73,7 +68,7 @@ class ShowNote extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 7, top: 7.0),
                 child: Text(
-                  note.contents,
+                  upcomingSchedule.contents,
                   style: const TextStyle(color: Color.fromRGBO(136, 189, 241, 1), fontSize: 12),
                   maxLines: 10,
                   overflow: TextOverflow.ellipsis,
@@ -89,7 +84,7 @@ class ShowNote extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(Icons.person, color: Colors.greenAccent, size: 20),
-                      Text(" by ${note.poster}", style: const TextStyle(color: Color.fromRGBO(136, 189, 241, 1), fontSize: 12)),
+                      Text(" by ${upcomingSchedule.poster}", style: const TextStyle(color: Color.fromRGBO(136, 189, 241, 1), fontSize: 12)),
                       const SizedBox(width: 10),
                     ],
                   ),

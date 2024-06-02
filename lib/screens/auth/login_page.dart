@@ -48,78 +48,80 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(25.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // logo
-              Icon(
-                Icons.person,
-                size: 80,
-                color: Theme.of(context).colorScheme.inversePrimary,
-              ),
-              const SizedBox(height: 25),
-              // app name
-              const Text(
-                "T A S K   M A N A G E R",
-                style: TextStyle(fontSize: 20),
-              ),
-              const SizedBox(height: 50),
-              // email textfield
-              TMTextField(
-                hintText: "Email",
-                obscureText: false,
-                controller: emailController,
-              ),
-              const SizedBox(height: 10),
-              // password textfield
-              TMTextField(
-                hintText: "Password",
-                obscureText: true,
-                controller: passwordController,
-              ),
-              // forgot password
-              const SizedBox(height: 10),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "Forgot Password?",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 25),
-              // sign in buttom
-              TMButton(
-                text: "Login",
-                onTap: login,
-              ),
-              const SizedBox(height: 25),
-              // dont have a account ? register here
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account?",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.inversePrimary,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(25.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // logo
+                Icon(
+                  Icons.person,
+                  size: 80,
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                const SizedBox(height: 25),
+                // app name
+                const Text(
+                  "T A S K   M A N A G E R",
+                  style: TextStyle(fontSize: 20),
+                ),
+                const SizedBox(height: 50),
+                // email textfield
+                TMTextField(
+                  hintText: "Email",
+                  obscureText: false,
+                  controller: emailController,
+                ),
+                const SizedBox(height: 10),
+                // password textfield
+                TMTextField(
+                  hintText: "Password",
+                  obscureText: true,
+                  controller: passwordController,
+                ),
+                // forgot password
+                const SizedBox(height: 10),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Forgot Password?",
+                      style: TextStyle(color: Colors.white),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: const Text(
-                      " Register Here",
+                  ],
+                ),
+                const SizedBox(height: 25),
+                // sign in buttom
+                TMButton(
+                  text: "Login",
+                  onTap: login,
+                ),
+                const SizedBox(height: 25),
+                // dont have a account ? register here
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account?",
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.inversePrimary,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: const Text(
+                        " Register Here",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

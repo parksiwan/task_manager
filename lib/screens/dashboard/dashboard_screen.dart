@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/widgets/task_service_tile.dart';
 import 'package:task_manager/widgets/notes_display.dart';
@@ -13,10 +14,48 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   //int stats = 0;
 
+  // -----------------------------------------------------------------------------
   @override
   void initState() {
     super.initState();
+
+    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+      if (message != null) {
+        print('Notification caused app launch.');
+      }
+    });
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        print('-----------');
+        print(notification.body);
+        _showNotification(notification);
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('A new onMessageOpenedApp event was published!');
+    });
   }
+
+  void _showNotification(RemoteNotification notification) {
+    showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text(notification.title ?? ''),
+            content: Text(notification.body ?? ''),
+          );
+        });
+  }
+  // -------------------------------------------------------------------------------------
+
+  //@override
+  //void initState() {
+  //  super.initState();
+  //}
 
   void logout() async {
     try {

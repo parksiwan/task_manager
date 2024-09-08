@@ -76,13 +76,18 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
               onPressed: (context) {
                 MissingItem item = MissingItem(widget.productName, widget.productCode, widget.qty, widget.location, widget.shopName, widget.deliveryDate,
                     widget.picker, widget.pickupCompleted, widget.checker, widget.memo);
-                print("----");
-                print(widget.checker);
+                //print("----");
+                //print(widget.checker);
                 showModalBottomSheet(
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: AddMemoMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -99,7 +104,12 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: EditMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: EditMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -288,7 +298,12 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SingleChildScrollView(
-                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoMissingItem(memo: widget.memo)),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                              padding: const EdgeInsets.all(16),
+                                              child: ShowMemoMissingItem(memo: widget.memo)),
                                         );
                                       },
                                     );

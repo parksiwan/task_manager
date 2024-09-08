@@ -7,11 +7,11 @@ class AddMemoLowStockItem extends StatefulWidget {
   final String docID;
   final LowStockItem item;
   const AddMemoLowStockItem({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
-  }) : super(key: key);
+  });
 
   @override
   State<AddMemoLowStockItem> createState() => _AddMemoLowStockItemState();
@@ -57,7 +57,7 @@ class _AddMemoLowStockItemState extends State<AddMemoLowStockItem> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoLowStockItem(widget.docID, widget.item);
               },
@@ -84,7 +84,7 @@ class _AddMemoLowStockItemState extends State<AddMemoLowStockItem> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoLowStockItem(widget.docID, widget.item);
               },

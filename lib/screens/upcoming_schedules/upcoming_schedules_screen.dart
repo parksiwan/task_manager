@@ -65,6 +65,9 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
             builder: (BuildContext context) {
               return SingleChildScrollView(
                 child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     padding: const EdgeInsets.all(16),
                     child: AddUpcomingSchedule(
                       fb: _fb,
@@ -111,12 +114,12 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                     _focusedDay = focusedDay;
                   },
                   calendarStyle: CalendarStyle(
-                    weekendTextStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
+                    weekendTextStyle: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                     selectedDecoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.primary,
                       shape: BoxShape.circle,
                     ),
-                    selectedTextStyle: TextStyle(color: Colors.white),
+                    selectedTextStyle: const TextStyle(color: Colors.white),
                   ),
                 ),
                 Expanded(

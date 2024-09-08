@@ -67,7 +67,7 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
         shadowColor: Colors.black, // Shadow color
         child: ListTile(
           leading: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.onBackground, // Circle background color
+            backgroundColor: Theme.of(context).colorScheme.onSurface, // Circle background color
             radius: 17, // Circle radius
             child: Icon(
               string2IconData[widget.iconName], // Icon to display inside the circle
@@ -81,7 +81,7 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
           //contentPadding: EdgeInsets.fromLTRB(16, 8, 16, 8),
           trailing: Icon(
             Icons.navigate_next,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
       ),

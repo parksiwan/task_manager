@@ -25,7 +25,7 @@ class ShowMemoLowStockItem extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           ElevatedButton(
-            style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+            style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
             onPressed: () {
               Navigator.of(context).pop();
             },

@@ -10,12 +10,12 @@ class EditNote extends StatefulWidget {
   final Note note;
   //final Function() loadNewMissingItem;
   const EditNote({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.note,
     //required this.loadNewMissingItem,
-  }) : super(key: key);
+  });
 
   @override
   State<EditNote> createState() => _EditNoteState();
@@ -203,7 +203,7 @@ class _EditNoteState extends State<EditNote> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

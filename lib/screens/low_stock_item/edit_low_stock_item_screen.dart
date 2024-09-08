@@ -9,12 +9,12 @@ class EditLowStockItem extends StatefulWidget {
   final LowStockItem item;
   //final Function() loadNewMissingItem;
   const EditLowStockItem({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
     //required this.loadNewMissingItem,
-  }) : super(key: key);
+  });
 
   @override
   State<EditLowStockItem> createState() => _EditLowStockItemState();
@@ -188,7 +188,7 @@ class _EditLowStockItemState extends State<EditLowStockItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

@@ -7,11 +7,11 @@ class AddMemoMissingItem extends StatefulWidget {
   final String docID;
   final MissingItem item;
   const AddMemoMissingItem({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
-  }) : super(key: key);
+  });
 
   @override
   State<AddMemoMissingItem> createState() => _AddMemoMissingItemState();
@@ -57,7 +57,7 @@ class _AddMemoMissingItemState extends State<AddMemoMissingItem> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoMissingItem(widget.docID, widget.item);
               },
@@ -84,7 +84,7 @@ class _AddMemoMissingItemState extends State<AddMemoMissingItem> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoMissingItem(widget.docID, widget.item);
               },

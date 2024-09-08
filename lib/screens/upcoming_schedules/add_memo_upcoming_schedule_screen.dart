@@ -7,11 +7,11 @@ class AddMemoUpcomingSchedule extends StatefulWidget {
   final String docID;
   final UpcomingSchedule item;
   const AddMemoUpcomingSchedule({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
-  }) : super(key: key);
+  });
 
   @override
   State<AddMemoUpcomingSchedule> createState() => _AddMemoUpcomingScheduleState();
@@ -57,7 +57,7 @@ class _AddMemoUpcomingScheduleState extends State<AddMemoUpcomingSchedule> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoUpcomingSchedule(widget.docID, widget.item);
               },
@@ -84,7 +84,7 @@ class _AddMemoUpcomingScheduleState extends State<AddMemoUpcomingSchedule> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+              style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
               onPressed: () {
                 addMemoUpcomingSchedule(widget.docID, widget.item);
               },

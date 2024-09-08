@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 class AddUpcomingSchedule extends StatefulWidget {
   final FirestoreServiceUpcomingSchedule fb;
   const AddUpcomingSchedule({
-    Key? key,
+    super.key,
     required this.fb,
-  }) : super(key: key);
+  });
 
   @override
   State<AddUpcomingSchedule> createState() => _AddUpcomingScheduleState();
@@ -165,7 +165,7 @@ class _AddUpcomingScheduleState extends State<AddUpcomingSchedule> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

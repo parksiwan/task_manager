@@ -5,7 +5,7 @@ import 'package:task_manager/widgets/task_service_tile.dart';
 import 'package:task_manager/widgets/notes_display.dart';
 
 class DashboardScreen extends StatefulWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({super.key});
 
   @override
   State<DashboardScreen> createState() => _DashboardScreenState();

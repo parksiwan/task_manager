@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 class AddNote extends StatefulWidget {
   final FirestoreServiceNotes fb;
   const AddNote({
-    Key? key,
+    super.key,
     required this.fb,
-  }) : super(key: key);
+  });
 
   @override
   State<AddNote> createState() => _AddNoteState();
@@ -198,7 +198,7 @@ class _AddNoteState extends State<AddNote> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 class AddLowStockItem extends StatefulWidget {
   final FirestoreServiceLowStock fb;
   const AddLowStockItem({
-    Key? key,
+    super.key,
     required this.fb,
-  }) : super(key: key);
+  });
 
   @override
   State<AddLowStockItem> createState() => _AddLowStockItemState();
@@ -171,7 +171,7 @@ class _AddLowStockItemState extends State<AddLowStockItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

@@ -59,6 +59,9 @@ class _LowStockItemsState extends State<LowStockItems> {
             builder: (BuildContext context) {
               return SingleChildScrollView(
                 child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     padding: const EdgeInsets.all(16),
                     child: AddLowStockItem(
                       fb: _fb,

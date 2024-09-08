@@ -10,12 +10,12 @@ class EditUpcomingSchedule extends StatefulWidget {
   final UpcomingSchedule item;
   //final Function() loadNewMissingItem;
   const EditUpcomingSchedule({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
     //required this.loadNewMissingItem,
-  }) : super(key: key);
+  });
 
   @override
   State<EditUpcomingSchedule> createState() => _EditUpcomingScheduleState();
@@ -172,7 +172,7 @@ class _EditUpcomingScheduleState extends State<EditUpcomingSchedule> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

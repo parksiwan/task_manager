@@ -78,7 +78,12 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: AddMemoUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -95,7 +100,12 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: EditUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: EditUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -142,7 +152,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                             const SizedBox(width: 2),
                             Text(
                               widget.poster,
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface, fontSize: 12),
                             ),
                           ],
                         ),
@@ -153,7 +163,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                       width: 130,
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(topRight: Radius.circular(20)),
-                        color: Theme.of(context).colorScheme.onBackground,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10),
@@ -182,7 +192,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                     padding: const EdgeInsets.only(left: 7.0, top: 7),
                     child: Text(
                       widget.title,
-                      style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 17, fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 17, fontWeight: FontWeight.bold),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -194,7 +204,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                     padding: const EdgeInsets.only(left: 7, top: 7.0),
                     child: Text(
                       widget.contents,
-                      style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12),
+                      style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 12),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -211,7 +221,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                               ? const Icon(Icons.check_circle, color: Colors.greenAccent, size: 20)
                               : const Icon(Icons.error, color: Colors.orangeAccent, size: 20),
                           widget.taskCompleted
-                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12))
+                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 12))
                               : const Text(""),
                           const SizedBox(width: 10),
                           widget.memo == ""
@@ -222,7 +232,12 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SingleChildScrollView(
-                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoUpcomingSchedule(memo: widget.memo)),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                              padding: const EdgeInsets.all(16),
+                                              child: ShowMemoUpcomingSchedule(memo: widget.memo)),
                                         );
                                       },
                                     );

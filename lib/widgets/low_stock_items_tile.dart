@@ -79,7 +79,12 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: AddMemoLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: AddMemoLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -96,7 +101,12 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                   context: context,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: EditLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: EditLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
                     );
                   },
                 );
@@ -140,8 +150,8 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                     Container(
                       height: 50,
                       width: 130,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(topRight: Radius.circular(20)),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(topRight: Radius.circular(20)),
                         //color: Theme.of(context).colorScheme.onBackground,
                         color: Color.fromRGBO(218, 156, 244, 1),
                       ),
@@ -178,7 +188,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                           ),
                           Text(
                             widget.productCode,
-                            style: TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
+                            style: const TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
                           ),
                         ],
                       ),
@@ -196,7 +206,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                             Expanded(
                               child: Text(
                                 widget.location,
-                                style: TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
+                                style: const TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -219,7 +229,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                           ),
                           Text(
                             widget.currentQty,
-                            style: TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
+                            style: const TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
                           ),
                         ],
                       ),
@@ -237,7 +247,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                             Expanded(
                               child: Text(
                                 widget.picker,
-                                style: TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
+                                style: const TextStyle(color: Color.fromRGBO(218, 156, 244, 1), fontSize: 12),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -258,7 +268,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                               ? const Icon(Icons.check_circle, color: Colors.greenAccent, size: 20)
                               : const Icon(Icons.error, color: Colors.orangeAccent, size: 20),
                           widget.reportAccepted
-                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 12))
+                              ? Text(" by ${widget.checker}", style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 12))
                               : const Text(""),
                           const SizedBox(width: 10),
                           widget.memo == ""
@@ -269,7 +279,12 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return SingleChildScrollView(
-                                          child: Container(padding: const EdgeInsets.all(16), child: ShowMemoLowStockItem(memo: widget.memo)),
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                color: Theme.of(context).colorScheme.secondary,
+                                              ),
+                                              padding: const EdgeInsets.all(16),
+                                              child: ShowMemoLowStockItem(memo: widget.memo)),
                                         );
                                       },
                                     );

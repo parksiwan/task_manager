@@ -8,7 +8,7 @@ import 'package:task_manager/screens/missing_item/add_missing_item_screen.dart';
 //import 'package:provider/provider.dart';
 
 class MissingItems extends StatefulWidget {
-  const MissingItems({Key? key}) : super(key: key);
+  const MissingItems({super.key});
 
   @override
   State<MissingItems> createState() => _MissingItemsState();
@@ -61,6 +61,9 @@ class _MissingItemsState extends State<MissingItems> {
             builder: (BuildContext context) {
               return SingleChildScrollView(
                 child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     padding: const EdgeInsets.all(16),
                     child: AddMissingItem(
                       fb: _fb,

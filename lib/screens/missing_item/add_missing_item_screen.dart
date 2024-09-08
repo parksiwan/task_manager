@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 class AddMissingItem extends StatefulWidget {
   final FirestoreServiceMI fb;
   const AddMissingItem({
-    Key? key,
+    super.key,
     required this.fb,
-  }) : super(key: key);
+  });
 
   @override
   State<AddMissingItem> createState() => _AddMissingItemState();
@@ -185,7 +185,7 @@ class _AddMissingItemState extends State<AddMissingItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

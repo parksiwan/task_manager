@@ -85,14 +85,17 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
-                  seedColor: const Color.fromRGBO(1, 45, 115, 1),
-                  primary: const Color.fromRGBO(120, 180, 156, 1), // from hollden
-                  onPrimary: const Color.fromRGBO(176, 244, 252, 1), // from hollden
-                  secondary: const Color.fromRGBO(42, 41, 77, 1), // from holden (background color of tile or card)
-                  background: const Color.fromRGBO(40, 36, 68, 1), // from hollden (main background color)
-                  onBackground: const Color.fromRGBO(144, 140, 188, 1), // from hollden
-                  surface: const Color.fromRGBO(40, 36, 68, 1),
-                  onSurface: Colors.white),
+                seedColor: const Color.fromRGBO(1, 45, 115, 1),
+                primary: const Color.fromRGBO(120, 180, 156, 1), // from hollden
+                onPrimary: const Color.fromRGBO(176, 244, 252, 1), // from hollden
+                secondary: const Color.fromRGBO(42, 41, 77, 1), // from holden (background color of tile or card)
+
+                secondaryContainer: const Color.fromRGBO(40, 36, 68, 1), // from hollden (main background color)
+                secondaryFixed: const Color.fromRGBO(144, 140, 188, 1), // from hollden
+
+                surface: const Color.fromRGBO(40, 36, 68, 1), //   const Color.fromRGBO(40, 36, 68, 1),
+                onSurface: const Color.fromRGBO(144, 140, 188, 1),
+              ), //Colors.white),
               useMaterial3: true),
           home: const AuthPage() // SplashScreen(),
           ),

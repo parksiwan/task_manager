@@ -62,6 +62,9 @@ class _NotesState extends State<Notes> {
             builder: (BuildContext context) {
               return SingleChildScrollView(
                 child: Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                     padding: const EdgeInsets.all(16),
                     child: AddNote(
                       fb: _fb,
@@ -105,6 +108,9 @@ class _NotesState extends State<Notes> {
                             builder: (BuildContext context) {
                               return SingleChildScrollView(
                                 child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context).colorScheme.secondary,
+                                    ),
                                     padding: const EdgeInsets.all(16),
                                     child: ShowNote(
                                       note: note,

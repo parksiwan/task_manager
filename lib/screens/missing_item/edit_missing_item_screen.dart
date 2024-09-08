@@ -9,12 +9,12 @@ class EditMissingItem extends StatefulWidget {
   final MissingItem item;
   //final Function() loadNewMissingItem;
   const EditMissingItem({
-    Key? key,
+    super.key,
     required this.fb,
     required this.docID,
     required this.item,
     //required this.loadNewMissingItem,
-  }) : super(key: key);
+  });
 
   @override
   State<EditMissingItem> createState() => _EditMissingItemState();
@@ -204,7 +204,7 @@ class _EditMissingItemState extends State<EditMissingItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Theme.of(context).colorScheme.onBackground)),
+                  style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Theme.of(context).colorScheme.onSurface)),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       setState(() {

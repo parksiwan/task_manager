@@ -31,7 +31,7 @@ class ShowUpcomingSchedule extends StatelessWidget {
                       children: [
                         Text(
                           upcomingSchedule.category,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground, fontSize: 16),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface, fontSize: 16),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
@@ -43,7 +43,7 @@ class ShowUpcomingSchedule extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 10),
                     child: Text(
                       DateFormat('dd/MM/yyyy').format(upcomingSchedule.etda),
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onBackground),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Theme.of(context).colorScheme.onSurface),
                     ),
                   ),
                 ),

@@ -81,6 +81,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: AddMemoUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),
@@ -103,6 +104,7 @@ class _UpcomingSchedulesTileState extends State<UpcomingSchedulesTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: EditUpcomingSchedule(fb: widget.fb, docID: widget.docID, item: item)),

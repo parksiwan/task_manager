@@ -63,6 +63,7 @@ class _MissingItemsState extends State<MissingItems> {
                 child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.secondary,
+                      //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                     ),
                     padding: const EdgeInsets.all(16),
                     child: AddMissingItem(

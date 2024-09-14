@@ -85,6 +85,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: AddMemoMissingItem(fb: widget.fb, docID: widget.docID, item: item)),
@@ -107,6 +108,7 @@ class _MissingItemsTileState extends State<MissingItemsTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: EditMissingItem(fb: widget.fb, docID: widget.docID, item: item)),

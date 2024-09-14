@@ -160,12 +160,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 15),
               ListTile(
-                title: Text("Today's Notes", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold)),
+                title: Text("What's next?", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold)),
               ),
               const Column(
                 children: [
-                  NotesDisplay(title: 'Pickup', contents: 'Please take all picture of pick-ups before taping up'),
-                  NotesDisplay(title: 'test2', contents: 'test2 display'),
+                  NotesDisplay(title: 'Test 1', contents: 'I am thinking what is gonna be here'),
+                  NotesDisplay(title: 'Test 2', contents: 'Still I am thinking ...'),
                 ],
               )
             ],

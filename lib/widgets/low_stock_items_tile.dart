@@ -82,6 +82,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: AddMemoLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),
@@ -104,6 +105,7 @@ class _LowStockItemsTileState extends State<LowStockItemsTile> {
                       child: Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                           ),
                           padding: const EdgeInsets.all(16),
                           child: EditLowStockItem(fb: widget.fb, docID: widget.docID, item: item)),

@@ -48,9 +48,17 @@ class _NotesTileState extends State<NotesTile> {
                 Note note = Note(widget.title, widget.category, widget.contents, widget.postDate, widget.poster, widget.priority);
                 showModalBottomSheet(
                   context: context,
+                  isScrollControlled: true,
                   builder: (BuildContext context) {
                     return SingleChildScrollView(
-                      child: Container(padding: const EdgeInsets.all(16), child: EditNote(fb: widget.fb, docID: widget.docID, note: note)),
+                      child: Container(
+                          height: MediaQuery.of(context).size.height * 0.9, // to make bottom sheet be expanded
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).colorScheme.secondary,
+                            //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: EditNote(fb: widget.fb, docID: widget.docID, note: note)),
                     );
                   },
                 );

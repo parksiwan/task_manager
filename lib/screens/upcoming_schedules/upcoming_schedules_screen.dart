@@ -62,9 +62,11 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             builder: (BuildContext context) {
               return SingleChildScrollView(
                 child: Container(
+                    height: MediaQuery.of(context).size.height * 0.9, // to make bottom sheet be expanded
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.secondary,
                       //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),

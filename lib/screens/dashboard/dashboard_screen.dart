@@ -94,29 +94,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
       body: Column(children: [
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.only(top: 100, left: 15, right: 15, bottom: 30),
+          padding: const EdgeInsets.only(top: 100, left: 15, right: 15, bottom: 0),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
           child: const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Text(
-                'Please post & share every information and make them valuable for our jobs.',
-                style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, height: 1.5),
-              ),
-              SizedBox(height: 10),
+              //SizedBox(height: 1),
+              //Text(
+              //  'Please post & share every information and make them valuable for our jobs.',
+              //  style: TextStyle(color: Colors.white70, fontWeight: FontWeight.w300, height: 1.5),
+              //),
+              //SizedBox(height: 10),
             ],
           ),
         ),
+        SizedBox(height: 20),
         Expanded(
           child: ListView(
             padding: const EdgeInsets.symmetric(vertical: 10),
             children: [
               ListTile(
                 title: Text(
-                  'Tasks',
+                  'SCM Tasks',
                   style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -128,12 +129,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   //padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
                   //scrollDirection: Axis.vertical,
                   children: [
-                    TaskServiceTile(
-                      iconName: "priority_high",
-                      title: 'Missing Items',
-                      stats: 'Fix the missing pickup', //Provider.of<SharedStats>(context).stats.toString(),
-                      taskMenu: 1,
-                    ),
                     const SizedBox(height: 7),
                     TaskServiceTile(
                       iconName: "gpp maybe",
@@ -160,14 +155,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 15),
               ListTile(
-                title: Text("What's next?", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold)),
+                title: Text("Warehouse Tasks", style: Theme.of(context).textTheme.titleLarge!.copyWith(color: Colors.grey, fontWeight: FontWeight.bold)),
               ),
-              const Column(
-                children: [
-                  NotesDisplay(title: 'Test 1', contents: 'I am thinking what is gonna be here'),
-                  NotesDisplay(title: 'Test 2', contents: 'Still I am thinking ...'),
-                ],
-              )
+              const SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  //padding: const EdgeInsets.only(top: 5, bottom: 10, left: 5, right: 5),
+                  //scrollDirection: Axis.vertical,
+                  children: [
+                    TaskServiceTile(
+                      iconName: "box",
+                      title: 'ST Picking & Packing',
+                      stats: 'Pick-up and PO-check for Suchi Train shops',
+                      taskMenu: 5,
+                    ),
+                    const SizedBox(height: 7), // week view c
+                    TaskServiceTile(
+                      iconName: "priority_high",
+                      title: 'Missing Items',
+                      stats: 'Fix the missing pickup', //Provider.of<SharedStats>(context).stats.toString(),
+                      taskMenu: 1,
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         )

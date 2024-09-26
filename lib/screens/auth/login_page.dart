@@ -68,6 +68,11 @@ class _LoginPageState extends State<LoginPage> {
                   "T A S K   M A N A G E R",
                   style: TextStyle(fontSize: 20),
                 ),
+                const SizedBox(height: 2),
+                const Text(
+                  "Powered by Siwan",
+                  style: TextStyle(fontSize: 12),
+                ),
                 const SizedBox(height: 50),
                 // email textfield
                 TMTextField(

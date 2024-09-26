@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:task_manager/models/missing_item.dart';
 import 'package:task_manager/models/low_stock_item.dart';
+import 'package:task_manager/models/st_picking_packing.dart';
 import 'package:task_manager/models/upcoming_schedule.dart';
 import 'package:task_manager/models/notes.dart';
 
@@ -76,6 +77,7 @@ class FirestoreServiceLowStock {
   }
 }
 
+// ---------------------------------------------------------------------------------------------------------------------------------------------
 class FirestoreServiceUpcomingSchedule {
   // get collection of upcoming schedules
   final CollectionReference upcomingSchedules = FirebaseFirestore.instance.collection('UPCOMING_SCHEDULES');
@@ -134,6 +136,56 @@ class FirestoreServiceNotes {
   //Delete: delete note given a doc id
   Future<void> deleteNote(String docID) {
     return notes.doc(docID).delete();
+  }
+}
+
+// -------------------------------------------------------------------------------------------------------------------
+class FirestoreServiceSTPP {
+  // get collection of missing items
+  final CollectionReference stPickingPacking = FirebaseFirestore.instance.collection('ST_PICKING_PACKING');
+
+  // Create: add a new ST-picking-packing item
+  Future<void> addStPickingPacking(StPickingPacking item) {
+    return stPickingPacking.add(item.toMap());
+  }
+
+  // Read: get ST-picking-packing from database
+  Stream<QuerySnapshot> getStPickingPackingStream(DateTime selectedDate) {
+    // Get today's date
+    //DateTime startingDate = selectedDate;
+    // Strip time components
+    DateTime startingDate = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, 0, 0, 0);
+
+    final stPickingPackingStream =
+        stPickingPacking.where('deliveryDate', isGreaterThanOrEqualTo: Timestamp.fromDate(startingDate)).orderBy('deliveryDate', descending: false).snapshots();
+
+    return stPickingPackingStream;
+  }
+
+  // Update: update st-picking-packing items given a doc id
+  Future<void> updateStPickingPacking(String docID, StPickingPacking item) {
+    return stPickingPacking.doc(docID).update(item.updateStPickingPackingToMap(
+        item.shopName,
+        item.picker,
+        item.missingItems,
+        item.checker,
+        item.numberOfBox,
+        item.deliveryDate,
+        item.additionalItems,
+        item.numberOfBoxAdd,
+        item.officeItems,
+        item.numberOfBoxOffice,
+        item.pickupCompleted,
+        item.checkCompleted,
+        item.additionalCompleted,
+        item.officeCompleted,
+        item.checkerAdditional,
+        item.checkerOffice));
+  }
+
+  //Delete: delete st-picking-packing given a doc id
+  Future<void> deleteStPickingPacking(String docID) {
+    return stPickingPacking.doc(docID).delete();
   }
 }
 

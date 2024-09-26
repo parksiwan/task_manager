@@ -3,6 +3,7 @@ import 'package:task_manager/screens/missing_item/missing_items_screen.dart';
 import 'package:task_manager/screens/low_stock_item/low_stock_items_screen.dart';
 import 'package:task_manager/screens/upcoming_schedules/upcoming_schedules_screen.dart';
 import 'package:task_manager/screens/notes/notes_screen.dart';
+import 'package:task_manager/screens/st_picking_packing/st_picking_packing_screen.dart';
 
 class TaskServiceTile extends StatefulWidget {
   final String iconName;
@@ -29,6 +30,7 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
     "gpp maybe": Icons.gpp_maybe_outlined,
     "event_available": Icons.event_available,
     "speaker_notes": Icons.speaker_notes,
+    "box": Icons.inventory_2
   };
 
   @override
@@ -58,6 +60,11 @@ class _TaskServiceTileState extends State<TaskServiceTile> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Notes()),
+            );
+          case 5:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const StPickingPacking()),
             );
         }
       },

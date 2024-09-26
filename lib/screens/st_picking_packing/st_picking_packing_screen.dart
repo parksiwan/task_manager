@@ -2,21 +2,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
 import 'package:task_manager/data/database.dart';
-import 'package:task_manager/models/upcoming_schedule.dart';
-import 'package:task_manager/screens/upcoming_schedules/show_upcoming_schedule_screen.dart';
-import 'package:task_manager/widgets/upcoming_schedules_tile.dart';
-import 'package:task_manager/screens/upcoming_schedules/add_upcoming_schedule_screen.dart';
+import 'package:task_manager/models/st_picking_packing.dart';
+
+import 'package:task_manager/widgets/st_picking_packing_tile.dart';
+import 'package:task_manager/screens/st_picking_packing/add_st_picking_packing_screen.dart';
+
 import 'package:table_calendar/table_calendar.dart';
 
-class UpcomingSchedules extends StatefulWidget {
-  const UpcomingSchedules({super.key});
+class StPickingPacking extends StatefulWidget {
+  const StPickingPacking({super.key});
 
   @override
-  State<UpcomingSchedules> createState() => _UpcomingSchedulesState();
+  State<StPickingPacking> createState() => _StPickingPackingState();
 }
 
-class _UpcomingSchedulesState extends State<UpcomingSchedules> {
-  final FirestoreServiceUpcomingSchedule _fb = FirestoreServiceUpcomingSchedule();
+class _StPickingPackingState extends State<StPickingPacking> {
+  final FirestoreServiceSTPP _fb = FirestoreServiceSTPP();
   CalendarFormat _calendarFormat = CalendarFormat.week;
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay = DateTime.now();
@@ -37,7 +38,7 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
       appBar: AppBar(
         toolbarHeight: 40,
         title: const Text(
-          'Upcoming Schedules', // + Provider.of<SharedStats>(context).stats.toString(),
+          'ST Picking & Packing', // + Provider.of<SharedStats>(context).stats.toString(),
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
         centerTitle: true,
@@ -72,7 +73,7 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                       //borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
                     ),
                     padding: const EdgeInsets.all(16),
-                    child: AddUpcomingSchedule(
+                    child: AddStPickingPacking(
                       fb: _fb,
                     )),
               );
@@ -81,6 +82,7 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
         },
         child: const Icon(Icons.add),
       ),
+      // ---------------------------------------
       body: Column(
         children: [
           Container(
@@ -127,49 +129,57 @@ class _UpcomingSchedulesState extends State<UpcomingSchedules> {
                 ),
                 Expanded(
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: _fb.getUpcomingScheduleStream(_selectedDay!),
+                      stream: _fb.getStPickingPackingStream(_selectedDay!),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          List lowStockItemsList = snapshot.data!.docs;
+                          List stPickingPackingList = snapshot.data!.docs;
                           //print('3333333');
                           //print(lowStockItemsList.length);
                           return ListView.builder(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            itemCount: lowStockItemsList.length,
+                            itemCount: stPickingPackingList.length,
                             itemBuilder: (context, index) {
                               //get each individual doc
-                              DocumentSnapshot document = lowStockItemsList[index];
+                              DocumentSnapshot document = stPickingPackingList[index];
                               String docID = document.id;
                               // get missing item from each doc
                               Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-                              data['checker'] = data['checker'] ?? "";
-                              data['memo'] = data['memo'] ?? "";
+                              //data['checker'] = data['checker'] ?? "";
+                              //data['memo'] = data['memo'] ?? "";
                               return GestureDetector(
-                                onTap: () {
-                                  UpcomingSchedule upcomingSchedule = UpcomingSchedule(data['category'], data['title'], data['contents'], data['etda'].toDate(),
-                                      data['poster'], data['taskCompleted'], data['checker'], data['memo']);
-                                  showModalBottomSheet(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return SingleChildScrollView(
-                                        child: Container(
-                                            padding: const EdgeInsets.all(16),
-                                            child: ShowUpcomingSchedule(
-                                              upcomingSchedule: upcomingSchedule,
-                                            )),
-                                      );
-                                    },
-                                  );
-                                },
-                                child: UpcomingSchedulesTile(
-                                  category: data['category'],
-                                  title: data['title'],
-                                  contents: data['contents'],
-                                  etda: data['etda'].toDate(),
-                                  poster: data['poster'],
-                                  taskCompleted: data['taskCompleted'],
+                                //onTap: () {
+                                //  StPickingPacking stPickingPacking = StPickingPacking(data['category'], data['title'], data['contents'], data['etda'].toDate(),
+                                //      data['poster'], data['taskCompleted'], data['checker'], data['memo']);
+                                //  showModalBottomSheet(
+                                //    context: context,
+                                //    builder: (BuildContext context) {
+                                //      return SingleChildScrollView(
+                                //        child: Container(
+                                //            padding: const EdgeInsets.all(16),
+                                //            child: ShowUpcomingSchedule(
+                                //              upcomingSchedule: upcomingSchedule,
+                                //            )),
+                                //      );
+                                //    },
+                                //  );
+                                //},
+                                child: StPickingPackingTile(
+                                  shopName: data['shopName'],
+                                  picker: data['picker'],
+                                  missingItems: data['missingItems'],
                                   checker: data['checker'],
-                                  memo: data['memo'],
+                                  numberOfBox: data['numberOfBox'],
+                                  deliveryDate: data['deliveryDate'].toDate(),
+                                  additionalItems: data['additionalItems'],
+                                  numberOfBoxAdd: data['numberOfBoxAdd'],
+                                  officeItems: data['officeItems'],
+                                  numberOfBoxOffice: data['numberOfBoxOffice'],
+                                  pickupCompleted: data['pickupCompleted'],
+                                  checkCompleted: data['checkCompleted'],
+                                  additionalCompleted: data['additionalCompleted'],
+                                  officeCompleted: data['officeCompleted'],
+                                  checkerAdditional: data['checkerAdditional'],
+                                  checkerOffice: data['checkerOffice'],
                                   fb: _fb,
                                   docID: docID,
                                 ),

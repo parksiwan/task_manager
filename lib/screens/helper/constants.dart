@@ -24,3 +24,20 @@ List category = [
   {"name": "Container", "value": "Container"},
   {"name": "others", "value": "others"},
 ];
+
+List stShops = [
+  {"name": "ST-RW", "value": "ST-RW"},
+  {"name": "ST-MA", "value": "ST-MA"},
+  {"name": "ST-RB", "value": "ST-RB"},
+  {"name": "ST-NB", "value": "ST-NB"},
+  {"name": "ST-DY", "value": "ST-DY"},
+  {"name": "ST-SL", "value": "ST-SL"},
+  {"name": "ST-CN", "value": "ST-CN"},
+  {"name": "ST-BC", "value": "ST-BC"},
+  {"name": "ST-BJ", "value": "ST-BJ"},
+  {"name": "ST-RY", "value": "ST-RY"},
+  {"name": "ST-WL", "value": "ST-WL"},
+  {"name": "ST-OX", "value": "ST-OX"},
+  {"name": "ST-SH", "value": "ST-SH"},
+  {"name": "ST-NT", "value": "ST-NT"},
+];

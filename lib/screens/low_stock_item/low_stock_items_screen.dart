@@ -78,7 +78,7 @@ class _LowStockItemsState extends State<LowStockItems> {
       body: Column(children: [
         Container(
           width: double.infinity,
-          padding: const EdgeInsets.only(top: 100, left: 15, right: 15, bottom: 30),
+          padding: const EdgeInsets.only(top: 100, left: 15, right: 15, bottom: 0),
           decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.secondary,
               borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(40), bottomRight: Radius.circular(40))),
